@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "mixinenhance",
+  "version": "${version}",
+  "name": "mixinEnhance",
+  "description": "原版游戏增强",
+  "authors": [
+    "Frankfurtlin"
+  ],
+  "contact": {
+    "website": "https://frankfurtlin.top",
+    "repo": "https://github.com/Frankfurtlin/mixinEnhance"
+  },
+  "license": "All-Rights-Reserved",
+  "icon": "assets/mixinenhance/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "com.frankfurtlin.mixinenhance.client.MixinEnhanceClient"
+    ],
+    "main": [
+      "com.frankfurtlin.mixinenhance.MixinEnhance"
+    ],
+    "modmenu": [
+      "com.frankfurtlin.mixinenhance.config.ModMenuIntegration"
+    ]
+  },
+  "mixins": [
+    "mixinenhance.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
