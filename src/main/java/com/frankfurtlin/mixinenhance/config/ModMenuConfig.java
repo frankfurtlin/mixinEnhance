@@ -9,6 +9,10 @@ import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
 
+/**
+ * 配置参考链接
+ * <a href="https://shedaniel.gitbook.io/cloth-config/auto-config/annotations">...</a>
+ */
 @Config(name = "mixinenhance")
 public class ModMenuConfig implements ConfigData {
     static {
@@ -20,7 +24,7 @@ public class ModMenuConfig implements ConfigData {
     // 特性
     @ConfigEntry.Category("default")
     @ConfigEntry.Gui.TransitiveObject
-    public DefaultModuleConfig defaultModuleAConfig = new DefaultModuleConfig();
+    public DefaultModuleConfig defaultModuleConfig = new DefaultModuleConfig();
 
     // 物品
     @ConfigEntry.Category("item")

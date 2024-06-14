@@ -3,6 +3,8 @@
     "text.autoconfig.mixinenhance.category.default": "feature",
     "text.autoconfig.mixinenhance.category.item": "item",
     "text.autoconfig.mixinenhance.category.entity": "entity",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.enableAutoFishing": "enableAutoFishing",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.enableAutoFishing.@Tooltip": "enableAutoFishing",
     "text.autoconfig.mixinenhance.option.itemModuleConfig.tntConfig": "tnt",
     "text.autoconfig.mixinenhance.option.itemModuleConfig.tntConfig.enableRandomExplode": "enableRandomExplode",
     "text.autoconfig.mixinenhance.option.itemModuleConfig.tntConfig.enableRandomExplode.@Tooltip": "enableRandomExplode",
