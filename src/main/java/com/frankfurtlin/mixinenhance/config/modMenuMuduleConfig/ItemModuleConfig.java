@@ -36,4 +36,16 @@ public class ItemModuleConfig {
     public EndCrystalConfig endCrystalConfig = new EndCrystalConfig();
     @ConfigEntry.Gui.Tooltip
     public boolean inventoryTotemEnabled = false;           // 是否启用不死图腾在背包中生效
+    @ConfigEntry.Gui.Tooltip
+    @ConfigEntry.BoundedDiscrete(min = -1, max = 3600)      // 光灵箭的荧光持续时间(秒)
+    public int spectralArrowDuration = 10;
+    @ConfigEntry.Gui.Tooltip
+    @ConfigEntry.BoundedDiscrete(min = 1, max = 100)
+    public int experienceBottleValue = 5;                   // 经验瓶经验值
+    @ConfigEntry.Gui.Tooltip
+    @ConfigEntry.BoundedDiscrete(min = 1, max = 15)         // 小火球伤害（火焰弹、烈焰人）
+    public int smallFireballDamage = 5;
+    @ConfigEntry.Gui.Tooltip
+    @ConfigEntry.BoundedDiscrete(min = 1, max = 20)         // 火球伤害（恶魂）
+    public int fireballDamage = 6;
 }

@@ -21,6 +21,14 @@
     "text.autoconfig.mixinenhance.option.itemModuleConfig.endCrystalConfig.maxExplodeRadius.@Tooltip": "maxExplodeRadius",
     "text.autoconfig.mixinenhance.option.itemModuleConfig.inventoryTotemEnabled": "inventoryTotemEnabled",
     "text.autoconfig.mixinenhance.option.itemModuleConfig.inventoryTotemEnabled.@Tooltip": "inventoryTotemEnabled",
+    "text.autoconfig.mixinenhance.option.itemModuleConfig.spectralArrowDuration": "spectralArrowDuration",
+    "text.autoconfig.mixinenhance.option.itemModuleConfig.spectralArrowDuration.@Tooltip": "spectralArrowDuration",
+    "text.autoconfig.mixinenhance.option.itemModuleConfig.experienceBottleValue": "experienceBottleValue",
+    "text.autoconfig.mixinenhance.option.itemModuleConfig.experienceBottleValue.@Tooltip": "experienceBottleValue",
+    "text.autoconfig.mixinenhance.option.itemModuleConfig.smallFireballDamage": "smallFireballDamage",
+    "text.autoconfig.mixinenhance.option.itemModuleConfig.smallFireballDamage.@Tooltip": "smallFireballDamage",
+    "text.autoconfig.mixinenhance.option.itemModuleConfig.fireballDamage": "fireballDamage",
+    "text.autoconfig.mixinenhance.option.itemModuleConfig.fireballDamage.@Tooltip": "fireballDamage",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.mobConfig": "mob",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.mobConfig.enableCustomMobLogic": "enableCustomMobLogic",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.mobConfig.enableCustomMobLogic.@Tooltip": "enableCustomMobLogic",
@@ -59,4 +67,5 @@
     "text.autoconfig.mixinenhance.option.entityModuleConfig.hostileMobConfig.creeperExplodeRadius.@Tooltip": "creeperExplodeRadius",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.hostileMobConfig.spiderSpawnWithEffect": "spiderSpawnWithEffect",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.hostileMobConfig.spiderSpawnWithEffect.@Tooltip": "spiderSpawnWithEffect"
+
 }

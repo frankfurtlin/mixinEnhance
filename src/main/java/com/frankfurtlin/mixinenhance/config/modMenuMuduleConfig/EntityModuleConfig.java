@@ -53,7 +53,7 @@ public class EntityModuleConfig {
         @ConfigEntry.BoundedDiscrete(min = 1, max = 10)
         public int creeperExplodeRadius = 3;               // 苦力怕爆炸半径
         @ConfigEntry.Gui.Tooltip
-        public double spiderSpawnWithEffect = 0.1;          // 蜘蛛生成时带有效果的概率
+        public double spiderSpawnWithEffect = 0.1;         // 蜘蛛生成时带有效果的概率
     }
 
     @ConfigEntry.Gui.CollapsibleObject(startExpanded = true)
@@ -61,4 +61,6 @@ public class EntityModuleConfig {
 
     @ConfigEntry.Gui.CollapsibleObject(startExpanded = true)
     public HostileMobConfig hostileMobConfig = new HostileMobConfig();
+
+
 }

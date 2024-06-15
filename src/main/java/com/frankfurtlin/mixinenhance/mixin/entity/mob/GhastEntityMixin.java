@@ -21,7 +21,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class GhastEntityMixin {
     @Shadow private int fireballStrength;
 
-    // 根据难度系数修改火球伤害
+    // 根据难度系数修改火球爆炸威力
     @Inject(method = "<init>", at = @At("TAIL"))
     private void fireballStrengthFactor(EntityType<? extends GhastEntity> entityType,
                                         World world, CallbackInfo ci){

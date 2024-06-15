@@ -39,8 +39,12 @@
         "entity.mob.WitherSkeletonEntityMixin",
         "entity.mob.ZombieEntityMixin",
         "entity.mob.ZombifiedPiglinEntityMixin",
+        "entity.projectile.ExperienceBottleEntityMixin",
+        "entity.projectile.FireballEntityMixin",
         "entity.projectile.FishingBobberEntityMixin",
-        "entity.projectile.ShulkerBulletEntityMixin"
+        "entity.projectile.ShulkerBulletEntityMixin",
+        "entity.projectile.SmallFireballEntityMixin",
+        "entity.projectile.SpectralArrowEntityMixin"
     ],
     "client": [
     ],
