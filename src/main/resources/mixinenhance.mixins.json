@@ -6,6 +6,7 @@
     "mixins": [
         "entity.EndCrystalEntityMixin",
         "entity.EvokerFangsEntityMixin",
+        "entity.ExperienceOrbEntityMixin",
         "entity.LivingEntityMixin",
         "entity.TntEntityMixin",
         "entity.animal.BeeEntityMixin",

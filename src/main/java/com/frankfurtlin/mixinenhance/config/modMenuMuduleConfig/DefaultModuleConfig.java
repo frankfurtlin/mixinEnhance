@@ -9,5 +9,7 @@ import me.shedaniel.autoconfig.annotation.ConfigEntry;
  */
 public class DefaultModuleConfig {
     @ConfigEntry.Gui.Tooltip
-    public boolean enableAutoFishing = false;        // 是否启用自动钓鱼
+    public boolean enableAutoFishing = false;                   // 是否启用自动钓鱼
+    @ConfigEntry.Gui.Tooltip
+    public boolean enablePlayerExpPickUpNoDelay = false;        // 是否启用玩家吸收经验无冷却
 }

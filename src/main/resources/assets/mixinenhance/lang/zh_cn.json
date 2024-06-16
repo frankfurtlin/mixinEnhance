@@ -5,6 +5,8 @@
     "text.autoconfig.mixinenhance.category.entity": "实体",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enableAutoFishing": "启用自动钓鱼",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enableAutoFishing.@Tooltip": "是否启用自动钓鱼",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.enablePlayerExpPickUpNoDelay": "启用玩家吸收经验无冷却",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.enablePlayerExpPickUpNoDelay.@Tooltip": "是否启用玩家吸收经验无冷却",
     "text.autoconfig.mixinenhance.option.itemModuleConfig.tntConfig": "TNT",
     "text.autoconfig.mixinenhance.option.itemModuleConfig.tntConfig.enableRandomExplode": "启用随机爆炸",
     "text.autoconfig.mixinenhance.option.itemModuleConfig.tntConfig.enableRandomExplode.@Tooltip": "是否启用TNT随机生成爆炸范围",
