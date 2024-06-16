@@ -48,4 +48,7 @@ public class ItemModuleConfig {
     @ConfigEntry.Gui.Tooltip
     @ConfigEntry.BoundedDiscrete(min = 1, max = 20)         // 火球伤害（恶魂）
     public int fireballDamage = 6;
+    @ConfigEntry.Gui.Tooltip
+    @ConfigEntry.BoundedDiscrete(min = 0, max = 10)         // 雪球伤害（对烈焰人三倍伤害）
+    public int snowballDamage = 0;
 }

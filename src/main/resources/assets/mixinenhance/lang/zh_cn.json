@@ -29,6 +29,8 @@
     "text.autoconfig.mixinenhance.option.itemModuleConfig.smallFireballDamage.@Tooltip": "小火球伤害",
     "text.autoconfig.mixinenhance.option.itemModuleConfig.fireballDamage": "大火球伤害（恶魂）",
     "text.autoconfig.mixinenhance.option.itemModuleConfig.fireballDamage.@Tooltip": "大火球伤害",
+    "text.autoconfig.mixinenhance.option.itemModuleConfig.snowballDamage": "雪球伤害",
+    "text.autoconfig.mixinenhance.option.itemModuleConfig.snowballDamage.@Tooltip": "雪球伤害（对烈焰人三倍伤害）",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.mobConfig": "怪物",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.mobConfig.enableCustomMobLogic": "启用怪物自定义",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.mobConfig.enableCustomMobLogic.@Tooltip": "是否启用怪物自定义逻辑",

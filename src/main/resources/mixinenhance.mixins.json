@@ -44,6 +44,7 @@
         "entity.projectile.FishingBobberEntityMixin",
         "entity.projectile.ShulkerBulletEntityMixin",
         "entity.projectile.SmallFireballEntityMixin",
+        "entity.projectile.SnowballEntityMixin",
         "entity.projectile.SpectralArrowEntityMixin"
     ],
     "client": [
