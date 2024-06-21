@@ -1,6 +1,6 @@
 package com.frankfurtlin.mixinenhance.mixin.entity.mob;
 
-import com.frankfurtlin.mixinenhance.config.ModMenuConfig;
+import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.mob.AbstractSkeletonEntity;
@@ -32,10 +32,10 @@ public abstract class WitherSkeletonEntityMixin extends AbstractSkeletonEntity {
      */
     @Overwrite
     public void initEquipment(Random random, LocalDifficulty localDifficulty) {
-        if(!ModMenuConfig.INSTANCE.entityModuleConfig.mobConfig.enableCustomMobLogic){
+        if(!MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enableCustomMobLogic){
             this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.STONE_SWORD));
         }
-        int index = ModMenuConfig.INSTANCE.entityModuleConfig.mobConfig.difficultyIndex;
+        int index = MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.difficultyIndex;
         if(index == 1){
             this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.STONE_SWORD));
         }else if(index < 4){
@@ -50,10 +50,10 @@ public abstract class WitherSkeletonEntityMixin extends AbstractSkeletonEntity {
     // 根据难度系数修改凋零骷髅的攻击力
     @ModifyConstant(method = "initialize", constant = @Constant(doubleValue = 4.0f))
     private double shootAt(double original) {
-        if(!ModMenuConfig.INSTANCE.entityModuleConfig.mobConfig.enableCustomMobLogic){
+        if(!MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enableCustomMobLogic){
             return original;
         }
-        int index = ModMenuConfig.INSTANCE.entityModuleConfig.mobConfig.difficultyIndex;
+        int index = MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.difficultyIndex;
         return (float) (original * Math.sqrt(index));
     }
 }

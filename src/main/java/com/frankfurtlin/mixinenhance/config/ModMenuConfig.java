@@ -3,24 +3,17 @@ package com.frankfurtlin.mixinenhance.config;
 import com.frankfurtlin.mixinenhance.config.modMenuMuduleConfig.DefaultModuleConfig;
 import com.frankfurtlin.mixinenhance.config.modMenuMuduleConfig.EntityModuleConfig;
 import com.frankfurtlin.mixinenhance.config.modMenuMuduleConfig.ItemModuleConfig;
-import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
-import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
 
 /**
  * 配置参考链接
  * <a href="https://shedaniel.gitbook.io/cloth-config/auto-config/annotations">...</a>
  */
 @Config(name = "mixinenhance")
+@SuppressWarnings("FieldMayBeFinal")
 public class ModMenuConfig implements ConfigData {
-    static {
-        AutoConfig.register(ModMenuConfig.class, JanksonConfigSerializer::new);
-    }
-    @ConfigEntry.Gui.Excluded
-    public static final ModMenuConfig INSTANCE = AutoConfig.getConfigHolder(ModMenuConfig.class).getConfig();
-
     // 特性
     @ConfigEntry.Category("default")
     @ConfigEntry.Gui.TransitiveObject

@@ -16,7 +16,7 @@
   "environment": "*",
   "entrypoints": {
     "client": [
-      "com.frankfurtlin.mixinenhance.client.MixinEnhanceClient"
+      "com.frankfurtlin.mixinenhance.MixinEnhanceClient"
     ],
     "main": [
       "com.frankfurtlin.mixinenhance.MixinEnhance"

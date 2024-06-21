@@ -1,6 +1,6 @@
 package com.frankfurtlin.mixinenhance.mixin.entity.projectile;
 
-import com.frankfurtlin.mixinenhance.config.ModMenuConfig;
+import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
 import net.minecraft.entity.projectile.SpectralArrowEntity;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
@@ -18,13 +18,13 @@ public abstract class SpectralArrowEntityMixin {
     @Redirect(method = "onHit",
         at = @At(value = "FIELD", target = "Lnet/minecraft/entity/projectile/SpectralArrowEntity;duration:I", opcode = Opcodes.GETFIELD))
     private int spectralArrowDurationOnHit(SpectralArrowEntity instance){
-        return ModMenuConfig.INSTANCE.itemModuleConfig.spectralArrowDuration;
+        return MixinEnhanceClient.getConfig().itemModuleConfig.spectralArrowDuration;
     }
 
     // 光灵箭荧光持续时间修改
     @Redirect(method = "writeCustomDataToNbt",
         at = @At(value = "FIELD", target = "Lnet/minecraft/entity/projectile/SpectralArrowEntity;duration:I", opcode = Opcodes.GETFIELD))
     private int spectralArrowDurationToNBT(SpectralArrowEntity instance){
-        return ModMenuConfig.INSTANCE.itemModuleConfig.spectralArrowDuration;
+        return MixinEnhanceClient.getConfig().itemModuleConfig.spectralArrowDuration;
     }
 }

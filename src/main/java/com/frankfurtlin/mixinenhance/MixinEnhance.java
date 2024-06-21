@@ -2,6 +2,7 @@ package com.frankfurtlin.mixinenhance;
 
 import net.fabricmc.api.ModInitializer;
 
+
 /**
  * @author Frankfurtlin
  * @version 1.0

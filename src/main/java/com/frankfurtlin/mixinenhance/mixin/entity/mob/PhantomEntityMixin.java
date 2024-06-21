@@ -1,0 +1,54 @@
+package com.frankfurtlin.mixinenhance.mixin.entity.mob;
+
+import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.mob.FlyingEntity;
+import net.minecraft.entity.mob.PhantomEntity;
+import net.minecraft.world.World;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import java.util.Objects;
+
+/**
+ * @author Frankfurtlin
+ * @version 1.0
+ * @date 2024/6/21 15:27
+ */
+@Mixin(PhantomEntity.class)
+public abstract class PhantomEntityMixin extends FlyingEntity {
+    @Shadow public abstract int getPhantomSize();
+
+    protected PhantomEntityMixin(EntityType<? extends FlyingEntity> entityType, World world) {
+        super(entityType, world);
+    }
+
+    // 根据难度系数修改幻翼的血量
+    @Inject(method = "<init>", at = @At("TAIL"))
+    private void customHealth(EntityType<? extends PhantomEntity> entityType, World world, CallbackInfo ci){
+        if (!MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enableCustomMobLogic) {
+            return;
+        }
+        int index = MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.difficultyIndex;
+        double health = (int) (20.0 * Math.sqrt(index));
+        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH)).setBaseValue(health);
+        this.setHealth((float) health);
+    }
+
+    // 根据难度系数修改幻翼的攻击力
+    @Inject(method = "onSizeChanged", cancellable = true, at = @At(value = "INVOKE", shift = At.Shift.BEFORE,
+        target = "Lnet/minecraft/entity/mob/PhantomEntity;getAttributeInstance(Lnet/minecraft/registry/entry/RegistryEntry;)Lnet/minecraft/entity/attribute/EntityAttributeInstance;"))
+    private void customAttackDamage(CallbackInfo ci){
+        if (!MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enableCustomMobLogic) {
+            return;
+        }
+        int index = MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.difficultyIndex;
+        double attack = (int) ((6 + this.getPhantomSize()) * Math.sqrt(index));
+        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE)).setBaseValue(attack);
+        ci.cancel();
+    }
+}

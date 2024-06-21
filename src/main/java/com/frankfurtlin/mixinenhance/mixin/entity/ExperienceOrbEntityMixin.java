@@ -1,6 +1,6 @@
 package com.frankfurtlin.mixinenhance.mixin.entity;
 
-import com.frankfurtlin.mixinenhance.config.ModMenuConfig;
+import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
 import net.minecraft.entity.ExperienceOrbEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.Constant;
@@ -16,7 +16,7 @@ public abstract class ExperienceOrbEntityMixin {
     // 玩家吸收经验无冷却
     @ModifyConstant(method = "onPlayerCollision", constant = @Constant(intValue = 2))
     private int enablePlayerExpPickUpNoDelay(int original){
-        if(ModMenuConfig.INSTANCE.defaultModuleConfig.enablePlayerExpPickUpNoDelay){
+        if(MixinEnhanceClient.getConfig().defaultModuleConfig.enablePlayerExpPickUpNoDelay){
             return 0;
         }
         return original;

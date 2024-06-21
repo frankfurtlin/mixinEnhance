@@ -1,6 +1,6 @@
 package com.frankfurtlin.mixinenhance.mixin.entity;
 
-import com.frankfurtlin.mixinenhance.config.ModMenuConfig;
+import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -21,7 +21,7 @@ public abstract class LivingEntityMixin {
     @Redirect(method = "tryUseTotem", at = @At(value = "INVOKE",
         target = "Lnet/minecraft/entity/LivingEntity;getStackInHand(Lnet/minecraft/util/Hand;)Lnet/minecraft/item/ItemStack;"))
     private ItemStack inventoryTotemEnabled(LivingEntity livingEntity, Hand hand) {
-        if (ModMenuConfig.INSTANCE.itemModuleConfig.inventoryTotemEnabled && livingEntity instanceof PlayerEntity) {
+        if (MixinEnhanceClient.getConfig().itemModuleConfig.inventoryTotemEnabled && livingEntity instanceof PlayerEntity) {
             for (int i = 0; i < ((PlayerEntity) livingEntity).getInventory().size(); i++) {
                 ItemStack itemStack = ((PlayerEntity) livingEntity).getInventory().getStack(i);
                 if (itemStack.isOf(Items.TOTEM_OF_UNDYING)) {

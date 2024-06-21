@@ -1,12 +1,17 @@
 package com.frankfurtlin.mixinenhance.mixin.entity.mob;
 
-import com.frankfurtlin.mixinenhance.config.ModMenuConfig;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
+import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.ShulkerEntity;
+import net.minecraft.entity.passive.GolemEntity;
+import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import java.util.Objects;
 
 /**
  * @author Frankfurtlin
@@ -14,18 +19,20 @@ import org.spongepowered.asm.mixin.Overwrite;
  * @date 2024/6/13 8:17
  */
 @Mixin(ShulkerEntity.class)
-public abstract class ShulkerEntityMixin {
-    /**
-     * @author frankfurtlin
-     * @reason 根据难度系数修改潜影壳的血量
-     */
-    @Overwrite
-    public static DefaultAttributeContainer.Builder createShulkerAttributes() {
-        if(!ModMenuConfig.INSTANCE.entityModuleConfig.mobConfig.enableCustomMobLogic){
-            return MobEntity.createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 30.0);
+public abstract class ShulkerEntityMixin extends GolemEntity {
+    protected ShulkerEntityMixin(EntityType<? extends GolemEntity> entityType, World world) {
+        super(entityType, world);
+    }
+
+    // 根据难度系数修改潜影壳的血量
+    @Inject(method = "<init>", at = @At("TAIL"))
+    private void customHealth(EntityType<? extends ShulkerEntity> entityType, World world, CallbackInfo ci) {
+        if (!MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enableCustomMobLogic) {
+            return;
         }
-        int index = ModMenuConfig.INSTANCE.entityModuleConfig.mobConfig.difficultyIndex;
-        double health = (int)(30.0 * Math.sqrt(index));
-        return MobEntity.createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, health);
+        int index = MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.difficultyIndex;
+        double health = (int) (30.0 * Math.sqrt(index));
+        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH)).setBaseValue(health);
+        this.setHealth((float) health);
     }
 }

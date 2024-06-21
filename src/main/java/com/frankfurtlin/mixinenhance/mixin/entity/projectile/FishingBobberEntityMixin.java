@@ -1,6 +1,6 @@
 package com.frankfurtlin.mixinenhance.mixin.entity.projectile;
 
-import com.frankfurtlin.mixinenhance.config.ModMenuConfig;
+import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -39,7 +39,7 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity {
     @Inject(method = "tick", at = @At(value = "INVOKE", ordinal = 2, shift = At.Shift.AFTER,
         target = "Lnet/minecraft/entity/projectile/FishingBobberEntity;setVelocity(Lnet/minecraft/util/math/Vec3d;)V"))
     private void autoFishing(CallbackInfo ci) {
-        if(!ModMenuConfig.INSTANCE.defaultModuleConfig.enableAutoFishing){
+        if(!MixinEnhanceClient.getConfig().defaultModuleConfig.enableAutoFishing){
             return;
         }
         PlayerEntity user = this.getPlayerOwner();

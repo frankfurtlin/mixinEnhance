@@ -1,6 +1,6 @@
 package com.frankfurtlin.mixinenhance.mixin.entity.projectile;
 
-import com.frankfurtlin.mixinenhance.config.ModMenuConfig;
+import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
 import net.minecraft.entity.projectile.ShulkerBulletEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.Constant;
@@ -16,10 +16,10 @@ public abstract class ShulkerBulletEntityMixin {
     // 根据难度系数修改潜影壳的子弹伤害
     @ModifyConstant(method = "onEntityHit", constant = @Constant(floatValue = 4.0f))
     private float onEntityHit(float original) {
-        if(!ModMenuConfig.INSTANCE.entityModuleConfig.mobConfig.enableCustomMobLogic){
+        if(!MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enableCustomMobLogic){
             return original;
         }
-        int index = ModMenuConfig.INSTANCE.entityModuleConfig.mobConfig.difficultyIndex;
+        int index = MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.difficultyIndex;
         return (float) (original * Math.sqrt(index));
     }
 }

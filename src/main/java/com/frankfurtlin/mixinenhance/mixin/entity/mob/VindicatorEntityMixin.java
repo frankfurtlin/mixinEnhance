@@ -1,11 +1,9 @@
 package com.frankfurtlin.mixinenhance.mixin.entity.mob;
 
-import com.frankfurtlin.mixinenhance.config.ModMenuConfig;
+import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.VindicatorEntity;
 import net.minecraft.entity.raid.RaiderEntity;
 import net.minecraft.item.ItemStack;
@@ -15,6 +13,11 @@ import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import java.util.Objects;
 
 /**
  * @author Frankfurtlin
@@ -27,26 +30,18 @@ public abstract class VindicatorEntityMixin extends RaiderEntity {
         super(entityType, world);
     }
 
-    /**
-     * @author frankfurtlin
-     * @reason 根据难度系数修改卫道士的血量、移动速度
-     */
-    @Overwrite
-    public static DefaultAttributeContainer.Builder createVindicatorAttributes() {
-        if (!ModMenuConfig.INSTANCE.entityModuleConfig.mobConfig.enableCustomMobLogic) {
-            return HostileEntity.createHostileAttributes().add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.35f)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 12.0)
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 24.0)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 5.0);
+    // 根据难度系数修改卫道士的血量、攻击力
+    @Inject(method = "<init>", at = @At("TAIL"))
+    private void customHealthAndAttackDamage(EntityType<? extends VindicatorEntity> entityType, World world, CallbackInfo ci){
+        if (!MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enableCustomMobLogic) {
+            return;
         }
-        int index = ModMenuConfig.INSTANCE.entityModuleConfig.mobConfig.difficultyIndex;
+        int index = MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.difficultyIndex;
         double health = (int) (24.0 * Math.sqrt(index));
-        double speed = 0.35 * (1 + index / 10.0);
         double attack = (int) (5.0 * Math.sqrt(index));
-        return HostileEntity.createHostileAttributes().add(EntityAttributes.GENERIC_MOVEMENT_SPEED, speed)
-            .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 12.0)
-            .add(EntityAttributes.GENERIC_MAX_HEALTH, health)
-            .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, attack);
+        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH)).setBaseValue(health);
+        this.setHealth((float) health);
+        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE)).setBaseValue(attack);
     }
 
     /**
@@ -56,10 +51,10 @@ public abstract class VindicatorEntityMixin extends RaiderEntity {
     @Overwrite
     public void initEquipment(Random random, LocalDifficulty localDifficulty) {
         if (this.getRaid() == null) {
-            if (!ModMenuConfig.INSTANCE.entityModuleConfig.mobConfig.enableCustomMobLogic) {
+            if (!MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enableCustomMobLogic) {
                 this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.IRON_AXE));
             } else {
-                int index = ModMenuConfig.INSTANCE.entityModuleConfig.mobConfig.difficultyIndex;
+                int index = MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.difficultyIndex;
                 if (index < 3) {
                     this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.IRON_AXE));
                 } else if (index < 8) {
