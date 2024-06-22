@@ -31,13 +31,7 @@ public class EntityModuleConfig {
         @ConfigEntry.Gui.Tooltip
         public double enchantmentArmorChance = 0.5;         // 怪物生成时盔甲附魔的概率
         @ConfigEntry.Gui.Tooltip
-        @ConfigEntry.BoundedDiscrete(min = 23, max = 100)
-        public int enchantmentArmorLevel = 23;              // 怪物生成时盔甲附魔的最高等级
-        @ConfigEntry.Gui.Tooltip
         public double enchantmentMainHandChance = 0.25;     // 怪物生成时主手工具附魔的概率
-        @ConfigEntry.Gui.Tooltip
-        @ConfigEntry.BoundedDiscrete(min = 23, max = 100)
-        public int enchantmentMainHandLevel = 23;           // 怪物生成时主手工具附魔的最高等级
     }
 
     public static class HostileMobConfig {

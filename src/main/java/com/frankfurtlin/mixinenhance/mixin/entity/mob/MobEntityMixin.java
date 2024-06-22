@@ -42,21 +42,12 @@ public abstract class MobEntityMixin {
     }
 
     // 修改怪物生成时盔甲附魔的概率
-    @ModifyConstant(method = "enchantEquipment", constant = @Constant(floatValue = 0.5F))
+    @ModifyConstant(method = "enchantEquipment*", constant = @Constant(floatValue = 0.5F))
     private float enchantmentArmorChance(float chance) {
         if (!MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enableCustomMobLogic) {
             return chance;
         }
         return (float) MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enchantmentArmorChance;
-    }
-
-    // 修改怪物生成时盔甲附魔的最高等级
-    @ModifyConstant(method = "enchantEquipment", constant = @Constant(intValue = 18))
-    private int enchantmentArmorLevel(int level) {
-        if (!MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enableCustomMobLogic) {
-            return level;
-        }
-        return MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enchantmentArmorLevel - 5;
     }
 
     // 修改怪物生成时主手工具附魔的概率
@@ -66,15 +57,6 @@ public abstract class MobEntityMixin {
             return chance;
         }
         return (float) MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enchantmentMainHandChance;
-    }
-
-    // 修改怪物生成时主手工具附魔的最高等级
-    @ModifyConstant(method = "enchantMainHandItem", constant = @Constant(intValue = 18))
-    private int enchantmentMainHandLevel(int level) {
-        if (!MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enableCustomMobLogic) {
-            return level;
-        }
-        return MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enchantmentMainHandLevel - 5;
     }
 
     // 修改怪物死亡时工具及盔甲掉落的概率
