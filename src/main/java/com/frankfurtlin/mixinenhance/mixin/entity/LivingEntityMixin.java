@@ -8,6 +8,8 @@ import net.minecraft.item.Items;
 import net.minecraft.util.Hand;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Constant;
+import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 /**
@@ -30,6 +32,26 @@ public abstract class LivingEntityMixin {
             }
         }
         return livingEntity.getStackInHand(hand);
+    }
+
+    // 玩家在水中不减速
+    @ModifyConstant(method = "travel", constant = @Constant(floatValue = 0.02f, ordinal = 0))
+    private float enablePlayerNoSlowInWater(float constant){
+        LivingEntity livingEntity = (LivingEntity) (Object)this;
+        if(MixinEnhanceClient.getConfig().entityModuleConfig.playerConfig.enablePlayerNoSlowInWater && livingEntity instanceof PlayerEntity){
+            return 0.04f;
+        }
+        return constant;
+    }
+
+    // 玩家在熔岩中不减速
+    @ModifyConstant(method = "travel", constant = @Constant(doubleValue = 0.5))
+    private double enablePlayerNoSlowInLava(double constant){
+        LivingEntity livingEntity = (LivingEntity) (Object)this;
+        if(MixinEnhanceClient.getConfig().entityModuleConfig.playerConfig.enablePlayerNoSlowInLava && livingEntity instanceof PlayerEntity){
+            return 0.9;
+        }
+        return constant;
     }
 }
 
