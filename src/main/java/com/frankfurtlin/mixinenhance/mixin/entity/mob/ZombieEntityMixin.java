@@ -59,7 +59,9 @@ public abstract class ZombieEntityMixin extends HostileEntity {
     /**
      * @author frankfurtlin
      * @reason 修改僵尸生成时自带的武器概率，同时修改僵尸武器（铁锹、铁剑）->
-     *                                 （铁锹、铁镐、铁剑、钻石锹、钻石镐、钻石剑、下届合金锹、下届合金镐、下届合金剑）
+     *                                 （铁锹、铁镐、铁剑、铁斧、铁锄）、
+     *                                 （钻石锹、钻石镐、钻石剑、钻石斧、钻石锄）、
+     *                                 （下届合金锹、下届合金镐、下届合金剑、下届合金斧、下届合金锄）
      */
     @Overwrite
     public void initEquipment(Random random, LocalDifficulty localDifficulty) {
@@ -87,19 +89,30 @@ public abstract class ZombieEntityMixin extends HostileEntity {
                 }else if(i == 2) {
                     this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.IRON_PICKAXE));
                 }else if(i == 3) {
-                    this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.DIAMOND_SWORD));
+                    this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.IRON_AXE));
                 }else if(i == 4) {
-                    this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.DIAMOND_SHOVEL));
+                    this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.IRON_HOE));
                 }else if(i == 5) {
-                    this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.DIAMOND_PICKAXE));
+                    this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.DIAMOND_SWORD));
                 }else if(i == 6) {
-                    this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.NETHERITE_SWORD));
+                    this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.DIAMOND_SHOVEL));
                 }else if(i == 7) {
-                    this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.NETHERITE_SHOVEL));
+                    this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.DIAMOND_PICKAXE));
                 }else if(i == 8) {
+                    this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.DIAMOND_AXE));
+                }else if(i == 9) {
+                    this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.DIAMOND_HOE));
+                }else if(i == 10) {
+                    this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.NETHERITE_SWORD));
+                }else if(i == 11) {
+                    this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.NETHERITE_SHOVEL));
+                }else if(i == 12) {
                     this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.NETHERITE_PICKAXE));
+                }else if(i == 13) {
+                    this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.NETHERITE_AXE));
+                }else if(i == 14) {
+                    this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.NETHERITE_HOE));
                 }
-            }
         }
 
     }
