@@ -117,13 +117,13 @@ public abstract class MobEntityMixin {
     // 修改怪物生成时主手工具附魔的概率
     @ModifyConstant(method = "enchantMainHandItem", constant = @Constant(floatValue = 0.25F))
     private float enchantMainHandItemChance(float chance) {
-        return (float) MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enchantmentMainHandChance;
+        return MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enchantmentMainHandChance;
     }
 
     // 修改怪物生成时盔甲附魔的概率
     @ModifyConstant(method = "enchantEquipment*", constant = @Constant(floatValue = 0.5F))
     private float enchantmentArmorChance(float chance) {
-        return (float) MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enchantmentArmorChance;
+        return MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enchantmentArmorChance;
     }
 
     // 根据难度系数修改单个区块怪物的数量

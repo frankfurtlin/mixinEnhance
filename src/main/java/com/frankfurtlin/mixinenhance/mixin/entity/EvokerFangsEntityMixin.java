@@ -16,10 +16,7 @@ public abstract class EvokerFangsEntityMixin {
     // 根据难度系数修改幻魔者尖牙伤害修改
     @ModifyConstant(method = "damage(Lnet/minecraft/entity/LivingEntity;)V", constant = @Constant(floatValue = 6.0F))
     private float damage(float original) {
-        if(!MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enableCustomMobLogic){
-            return original;
-        }
         int index = MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.difficultyIndex;
-        return (float) (original * Math.sqrt(index));
+        return original * index;
     }
 }

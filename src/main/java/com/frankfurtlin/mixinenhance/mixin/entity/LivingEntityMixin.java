@@ -59,6 +59,7 @@ public abstract class LivingEntityMixin {
         return constant;
     }
 
+    // 怪物死亡时掉落对应的刷怪笼
     @Inject(method = "onKilledBy", at = @At("TAIL"))
     private void injected(LivingEntity adversary, CallbackInfo ci) {
         World world = ((LivingEntity) (Object) this).getWorld();

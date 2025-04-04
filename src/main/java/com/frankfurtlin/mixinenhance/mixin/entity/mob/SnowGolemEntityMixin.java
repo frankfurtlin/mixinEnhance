@@ -29,7 +29,7 @@ public abstract class SnowGolemEntityMixin extends GolemEntity {
     @ModifyConstant(method = "createSnowGolemAttributes", constant = @Constant(doubleValue = 4.0f))
     private static double customHealth(double original) {
         int index = MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.difficultyIndex;
-        return (float) (original * Math.sqrt(index));
+        return original * index;
     }
 
     // 根据难度系数修改雪人的雪球伤害

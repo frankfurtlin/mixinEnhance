@@ -13,19 +13,17 @@ public class ItemModuleConfig {
         @ConfigEntry.BoundedDiscrete(min = 1, max = 4)      // TNT最小爆炸强度
         public int minExplodeRadius = 4;
         @ConfigEntry.Gui.Tooltip
-        @ConfigEntry.BoundedDiscrete(min = 5, max = 128)    // TNT最大爆炸强度
-        public int maxExplodeRadius = 8;
+        @ConfigEntry.BoundedDiscrete(min = 4, max = 128)    // TNT最大爆炸强度
+        public int maxExplodeRadius = 4;
     }
 
     public static class EndCrystalConfig {
         @ConfigEntry.Gui.Tooltip
-        public boolean enableRandomExplode = false;         // 是否启用末影水晶随机爆炸强度
-        @ConfigEntry.Gui.Tooltip
         @ConfigEntry.BoundedDiscrete(min = 1, max = 6)      // 末影水晶最小爆炸强度
         public int minExplodeRadius = 6;
         @ConfigEntry.Gui.Tooltip
-        @ConfigEntry.BoundedDiscrete(min = 7, max = 128)    // 末影水晶最大爆炸强度
-        public int maxExplodeRadius = 8;
+        @ConfigEntry.BoundedDiscrete(min = 6, max = 128)    // 末影水晶最大爆炸强度
+        public int maxExplodeRadius = 6;
     }
 
     @ConfigEntry.Gui.CollapsibleObject(startExpanded = true)

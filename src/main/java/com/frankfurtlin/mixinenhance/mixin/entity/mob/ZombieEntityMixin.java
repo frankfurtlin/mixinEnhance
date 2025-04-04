@@ -3,6 +3,7 @@ package com.frankfurtlin.mixinenhance.mixin.entity.mob;
 import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.ZombieEntity;
@@ -20,8 +21,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.Objects;
-
 /**
  * @author Frankfurtlin
  * @version 1.0
@@ -36,52 +35,37 @@ public abstract class ZombieEntityMixin extends HostileEntity {
     // 修改怪物拾取物品的概率
     @ModifyConstant(method = "initialize", constant = @Constant(floatValue = 0.55F))
     private float pickupLootChance(float chance) {
-        if(!MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enableCustomMobLogic){
-            return chance;
-        }
-        return (float)MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.pickupLootChance;
-    }
-
-    // 根据难度系数修改僵尸的血量、攻击力
-    @Inject(method = "<init>*", at = @At("TAIL"))
-    private void customHealthAndAttackDamage(EntityType<? extends ZombieEntity> entityType, World world, CallbackInfo ci){
-        if (!MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enableCustomMobLogic) {
-            return;
-        }
-        int index = MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.difficultyIndex;
-        double health = (int) (20.0 * Math.sqrt(index));
-        double attack = (int) (3.0 * Math.sqrt(index));
-        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.MAX_HEALTH)).setBaseValue(health);
-        this.setHealth((float) health);
-        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.ATTACK_DAMAGE)).setBaseValue(attack);
+        return MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.pickupLootChance;
     }
 
     /**
      * @author frankfurtlin
-     * @reason 修改僵尸生成时自带的武器概率，同时修改僵尸武器（铁锹、铁剑）->
-     *                                 （铁锹、铁镐、铁剑、铁斧、铁锄）、
-     *                                 （钻石锹、钻石镐、钻石剑、钻石斧、钻石锄）、
-     *                                 （下届合金锹、下届合金镐、下届合金剑、下届合金斧、下届合金锄）
+     * @reason 根据难度系数修改僵尸的攻击力
      */
     @Overwrite
-    public void initEquipment(Random random, LocalDifficulty localDifficulty) {
-        super.initEquipment(random, localDifficulty);
-        float f = random.nextFloat();
-        if(!MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enableCustomMobLogic){
-            float f2 = this.getWorld().getDifficulty() == Difficulty.HARD ? 0.05f : 0.01f;
-            if (f < f2) {
-                int i = random.nextInt(3);
-                if (i == 0) {
-                    this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.IRON_SWORD));
-                } else {
-                    this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.IRON_SHOVEL));
-                }
-            }
-        }else {
+    public static DefaultAttributeContainer.Builder createZombieAttributes() {
+        int index = MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.difficultyIndex;
+        return HostileEntity.createHostileAttributes()
+            .add(EntityAttributes.FOLLOW_RANGE, 35.0)
+            .add(EntityAttributes.MOVEMENT_SPEED, 0.23F)
+            .add(EntityAttributes.ATTACK_DAMAGE, 3.0 * index)
+            .add(EntityAttributes.ARMOR, 2.0)
+            .add(EntityAttributes.SPAWN_REINFORCEMENTS);
+    }
+
+    // 修改僵尸生成时自带的武器概率，
+    // 同时修改僵尸武器（铁锹、铁剑）->
+    //   （铁锹、铁镐、铁剑、铁斧、铁锄）、
+    //   （钻石锹、钻石镐、钻石剑、钻石斧、钻石锄）、
+    //   （下届合金锹、下届合金镐、下届合金剑、下届合金斧、下届合金锄）
+    @Inject(method = "initEquipment", at = @At("TAIL"))
+    public void initEquipment(Random random, LocalDifficulty localDifficulty, CallbackInfo ci) {
+        if (MixinEnhanceClient.getConfig().entityModuleConfig.hostileMobConfig.enableZombieWeaponEnhancement) {
             float rate = (float) MixinEnhanceClient.getConfig().entityModuleConfig.hostileMobConfig.zombieSpawnWithTool;
+            float f = random.nextFloat();
             float f2 = this.getWorld().getDifficulty() == Difficulty.HARD ? rate : rate / 5;
             if (f < f2) {
-                int i = random.nextInt(9);
+                int i = random.nextInt(15);
                 if (i == 0) {
                     this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.IRON_SWORD));
                 } else if (i == 1) {
