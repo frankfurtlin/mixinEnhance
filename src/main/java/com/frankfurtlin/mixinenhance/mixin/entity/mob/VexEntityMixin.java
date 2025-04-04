@@ -33,8 +33,8 @@ public abstract class VexEntityMixin extends HostileEntity{
         int index = MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.difficultyIndex;
         double health = (int) (14.0 * Math.sqrt(index));
         double attack = (int) (4.0 * Math.sqrt(index));
-        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH)).setBaseValue(health);
+        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.MAX_HEALTH)).setBaseValue(health);
         this.setHealth((float) health);
-        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE)).setBaseValue(attack);
+        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.ATTACK_DAMAGE)).setBaseValue(attack);
     }
 }

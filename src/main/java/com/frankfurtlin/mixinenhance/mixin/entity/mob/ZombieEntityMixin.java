@@ -51,9 +51,9 @@ public abstract class ZombieEntityMixin extends HostileEntity {
         int index = MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.difficultyIndex;
         double health = (int) (20.0 * Math.sqrt(index));
         double attack = (int) (3.0 * Math.sqrt(index));
-        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH)).setBaseValue(health);
+        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.MAX_HEALTH)).setBaseValue(health);
         this.setHealth((float) health);
-        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE)).setBaseValue(attack);
+        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.ATTACK_DAMAGE)).setBaseValue(attack);
     }
 
     /**
@@ -77,43 +77,43 @@ public abstract class ZombieEntityMixin extends HostileEntity {
                     this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.IRON_SHOVEL));
                 }
             }
-        }else{
-            float rate = (float)MixinEnhanceClient.getConfig().entityModuleConfig.hostileMobConfig.zombieSpawnWithTool;
+        }else {
+            float rate = (float) MixinEnhanceClient.getConfig().entityModuleConfig.hostileMobConfig.zombieSpawnWithTool;
             float f2 = this.getWorld().getDifficulty() == Difficulty.HARD ? rate : rate / 5;
             if (f < f2) {
                 int i = random.nextInt(9);
                 if (i == 0) {
                     this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.IRON_SWORD));
-                } else if(i == 1) {
+                } else if (i == 1) {
                     this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.IRON_SHOVEL));
-                }else if(i == 2) {
+                } else if (i == 2) {
                     this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.IRON_PICKAXE));
-                }else if(i == 3) {
+                } else if (i == 3) {
                     this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.IRON_AXE));
-                }else if(i == 4) {
+                } else if (i == 4) {
                     this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.IRON_HOE));
-                }else if(i == 5) {
+                } else if (i == 5) {
                     this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.DIAMOND_SWORD));
-                }else if(i == 6) {
+                } else if (i == 6) {
                     this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.DIAMOND_SHOVEL));
-                }else if(i == 7) {
+                } else if (i == 7) {
                     this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.DIAMOND_PICKAXE));
-                }else if(i == 8) {
+                } else if (i == 8) {
                     this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.DIAMOND_AXE));
-                }else if(i == 9) {
+                } else if (i == 9) {
                     this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.DIAMOND_HOE));
-                }else if(i == 10) {
+                } else if (i == 10) {
                     this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.NETHERITE_SWORD));
-                }else if(i == 11) {
+                } else if (i == 11) {
                     this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.NETHERITE_SHOVEL));
-                }else if(i == 12) {
+                } else if (i == 12) {
                     this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.NETHERITE_PICKAXE));
-                }else if(i == 13) {
+                } else if (i == 13) {
                     this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.NETHERITE_AXE));
-                }else if(i == 14) {
+                } else if (i == 14) {
                     this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.NETHERITE_HOE));
                 }
+            }
         }
-
     }
 }

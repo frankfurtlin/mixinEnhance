@@ -38,7 +38,7 @@ public abstract class CreeperEntityMixin extends HostileEntity {
         }
         int index = MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.difficultyIndex;
         double health = (int) (20.0 * Math.sqrt(index));
-        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH)).setBaseValue(health);
+        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.MAX_HEALTH)).setBaseValue(health);
         this.setHealth((float) health);
     }
 

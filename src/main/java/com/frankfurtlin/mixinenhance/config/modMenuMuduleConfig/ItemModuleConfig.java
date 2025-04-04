@@ -10,8 +10,6 @@ import me.shedaniel.autoconfig.annotation.ConfigEntry;
 public class ItemModuleConfig {
     public static class TntConfig {
         @ConfigEntry.Gui.Tooltip
-        public boolean enableRandomExplode = false;         // 是否启用TNT随机爆炸强度
-        @ConfigEntry.Gui.Tooltip
         @ConfigEntry.BoundedDiscrete(min = 1, max = 4)      // TNT最小爆炸强度
         public int minExplodeRadius = 4;
         @ConfigEntry.Gui.Tooltip
@@ -49,6 +47,6 @@ public class ItemModuleConfig {
     @ConfigEntry.BoundedDiscrete(min = 1, max = 20)         // 火球伤害（恶魂）
     public int fireballDamage = 6;
     @ConfigEntry.Gui.Tooltip
-    @ConfigEntry.BoundedDiscrete(min = 0, max = 10)         // 雪球伤害（对烈焰人三倍伤害）
+    @ConfigEntry.BoundedDiscrete(min = 0, max = 10)         // 雪球伤害
     public int snowballDamage = 0;
 }
